@@ -25,5 +25,7 @@
     <module>springboot-learn-kafka</module>
     <module>springboot-learn-es-crud</module>
     <module>springboot-learn-redis</module>
+    <module>springboot-learn-jedis</module>
+    <module>springboot-learn-redis-jedis</module>
   </modules>
 </project>

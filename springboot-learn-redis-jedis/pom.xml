@@ -7,20 +7,30 @@
     <artifactId>springboot-learn</artifactId>
     <version>1.0</version>
   </parent>
-  <artifactId>springboot-learn-redis</artifactId>
-  <name>springboot-learn-redis</name>
+  <artifactId>springboot-learn-redis-jedis</artifactId>
+  <name>springboot-learn-redis-jedis</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-  	<dependency>
+    <dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
-    <dependency>
-      	<groupId>org.springframework.boot</groupId>
-      	<artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
+	<dependency>  
+		<groupId>org.springframework.boot</groupId>  
+		<artifactId>spring-boot-starter-data-redis</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+	</dependency> 
+	<!-- org.apache.commons.lang -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.4</version>
+		</dependency>
   </dependencies>
 </project>

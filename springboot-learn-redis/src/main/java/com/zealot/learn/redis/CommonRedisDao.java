@@ -17,6 +17,7 @@
 package com.zealot.learn.redis;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.data.redis.core.ListOperations;
@@ -232,4 +233,26 @@ public interface CommonRedisDao {
      * @return
      */
     boolean removeOneOfList(String k);
+    
+    /**
+     * @Title: multiSet 
+     * @Description:批量缓存
+     * @param map
+     * @return 
+     * @author Zhao Haiming
+     * @date 2018年7月27日 下午5:50:34
+     */
+    public boolean multiSet(Map<String,String> map);
+    
+    /**
+     * @Title: multiSet 
+     * @Description:批删
+     * @param keys
+     * @return 
+     * @author Zhao Haiming
+     * @date 2018年7月27日 下午5:57:16
+     */
+    public boolean multiDel(List<String> keys);
+    
+    public String get(String key);
 }

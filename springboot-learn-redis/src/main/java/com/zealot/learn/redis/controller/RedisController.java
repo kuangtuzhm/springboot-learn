@@ -16,6 +16,13 @@
 
 package com.zealot.learn.redis.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +45,21 @@ public class RedisController {
     @Autowired
     private CommonRedisDao commonRedisDao;
     
+    ExecutorService executorService = Executors.newFixedThreadPool(100);
+    
     @RequestMapping(value = "/set", method = RequestMethod.GET)
     @ResponseBody
     public String set(String key,String value)
     {
-        commonRedisDao.cacheValue(key, value);
+        long start = System.currentTimeMillis();
+        Map<String,String> map= new HashMap<>(100000);
+        for(int i = 0; i<100000; i++)
+        {
+            map.put("key"+i, "value"+i);
+        }
+        commonRedisDao.multiSet(map);
+        long end = System.currentTimeMillis();
+        System.out.println("插入time="+(end-start));
         return "done";
     }
     
@@ -50,6 +67,39 @@ public class RedisController {
     @ResponseBody
     public String get(String key)
     {
-        return commonRedisDao.getValue(key);
+        long start = System.currentTimeMillis();
+        for(int i = 0; i<100000; i++)
+        {
+            final int k = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    String s = commonRedisDao.get("key"+k);
+                    System.out.println(s);
+                    
+                }  
+            });
+            
+        }
+        
+        long end = System.currentTimeMillis();
+        System.out.println("查询time="+(end-start));
+        return "done";
+    }
+    
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    @ResponseBody
+    public String del()
+    {
+        long start = System.currentTimeMillis();
+        List<String> keys = new ArrayList<>(100000);
+        for(int i = 0; i<100000; i++)
+        {
+            keys.add("key"+i);
+        }
+        commonRedisDao.multiDel(keys);
+        long end = System.currentTimeMillis();
+        System.out.println("删除time="+(end-start));
+        return "done";
     }
 }

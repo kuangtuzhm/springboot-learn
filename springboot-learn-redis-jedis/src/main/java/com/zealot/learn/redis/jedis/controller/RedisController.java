@@ -75,17 +75,13 @@ public class RedisController extends BaseRedisCache{
     {
         long start = System.currentTimeMillis();
         Jedis jedis = this.getResource();
-        
-        String [] keys = new String[200];
-        for(int i = 0; i<500;i++)
+        jedis.select(15);
+        String [] keys = new String[100000];
+        for(int i = 0; i<100000;i++)
         {
-            for(int j = 0; j<200;j++)
-            {
-                keys[j] = "test"+i+j;
-            }
-            jedis.select(15);
-            List<String> s = jedis.mget(keys);
+            keys[i] = "key"+i;
         }
+        List<String> s = jedis.mget(keys);
         jedis.close();
         long end = System.currentTimeMillis();
         System.out.println("查询time="+(end-start));

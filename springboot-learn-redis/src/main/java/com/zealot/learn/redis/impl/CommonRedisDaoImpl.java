@@ -17,6 +17,7 @@
 package com.zealot.learn.redis.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -427,5 +428,39 @@ public class CommonRedisDaoImpl implements CommonRedisDao {
             LOGGER.error("获取缓存失败key[" + key + ", Codeor[" + t + "]");
         }
         return false;
+    }
+    
+    public boolean multiSet(Map<String,String> map)
+    {
+        try {
+            ValueOperations<String, String> setOps = redisTemplate.opsForValue();
+            setOps.multiSet(map);
+            return true;
+        } catch (Throwable t) {
+            LOGGER.error("批量缓存失败", t);
+        }
+        return false;
+    }
+    
+    public boolean multiDel(List<String> keys)
+    {
+        try {
+            redisTemplate.delete(keys);
+            return true;
+        } catch (Throwable t) {
+            LOGGER.error("批量删除失败", t);
+        }
+        return false;
+    }
+    
+    public String get(String key)
+    {
+        try {
+            ValueOperations<String, String> valueOps = redisTemplate.opsForValue();
+            return valueOps.get(key);
+        } catch (Throwable t) {
+            LOGGER.error("查询key["+key+"]失败", t);
+        }
+        return null;
     }
 }

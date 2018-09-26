@@ -27,5 +27,6 @@
     <module>springboot-learn-redis</module>
     <module>springboot-learn-jedis</module>
     <module>springboot-learn-redis-jedis</module>
+    <module>springboot-learn-kafkaconsumer</module>
   </modules>
 </project>

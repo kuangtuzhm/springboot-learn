@@ -10,7 +10,7 @@
   <artifactId>springboot-learn</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <!-- 公共属�?�定�? -->
+  <!-- 公共属�?�定�? -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -25,8 +25,8 @@
     <module>springboot-learn-kafka</module>
     <module>springboot-learn-es-crud</module>
     <module>springboot-learn-redis</module>
-    <module>springboot-learn-jedis</module>
     <module>springboot-learn-redis-jedis</module>
+    <module>springboot-learn-kafkaconsumer</module>
     <module>springboot-learn-mybatis</module>
     <module>springboot-learn-activemq</module>
   </modules>

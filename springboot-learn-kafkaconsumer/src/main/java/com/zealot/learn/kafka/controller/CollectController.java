@@ -51,7 +51,7 @@ public class CollectController {
    for(int i = 0;i<10;i++)
    {
        logger.info("kafka的消息={}", message+i);
-       kafkaTemplate.send("flume.log.test", String.valueOf(i) , message+i);
+       kafkaTemplate.send("flume.log.test", String.valueOf(i), message+i);
        logger.info("发送kafka成功.");
    }
    return "发送kafka成功";

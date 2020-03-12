@@ -3,8 +3,8 @@
 BASE_DIR=$(cd "$(dirname "$0")"; pwd)/
 cd $BASE_DIR
 
-APP_NAME=rtv-os
-APP_ACTIVE=test
+APP_NAME=rocket-test
+APP_ACTIVE=dev
 
 LIBS=./lib
 
@@ -25,8 +25,9 @@ function startApp()
 		-Xloggc:log/gc.log
 	"
 
-    nohup java -DGID=$BASE_DIR -Dloader.path=$LIBS $JVM_PARAM -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8723,suspend=n -jar "$APP_NAME".jar --spring.profiles.active=$APP_ACTIVE  > "$APP_NAME".log 2>&1 &
-
+    #nohup java -DGID=$BASE_DIR -Dloader.path=$LIBS $JVM_PARAM -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8723,suspend=n -jar "$APP_NAME".jar --spring.profiles.active=$APP_ACTIVE  > "$APP_NAME".log 2>&1 &
+	nohup java -DGID=$BASE_DIR -Dloader.path=$LIBS $JVM_PARAM -jar "$APP_NAME".jar --spring.profiles.active=$APP_ACTIVE  > "$APP_NAME".log 2>&1 &
+	
 	rm -rf "$APP_NAME".log
 
 	echo "success start app $APP_NAME at [${BASE_DIR}] ......................"

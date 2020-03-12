@@ -16,6 +16,9 @@
 
 package com.zealot.learn.rocketmq;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * @FileName JmsConfig.java
  * @Description: 
@@ -27,14 +30,26 @@ package com.zealot.learn.rocketmq;
 /**
  * @Description: 安装实际开发这里的信息 都是应该写在配置里，来读取，这里为了方便所以写成常量
  */
+@Component
 public class JmsConfig {
     /**
      * Name Server 地址，因为是集群部署 所以有多个用 分号 隔开
      */
-    public static final String NAME_SERVER = "172.16.10.104:9876;172.16.10.104:9877";
+	@Value("{rocket.server.addr}")
+    public String rocketServer;
     /**
      * 主题名称 主题一般是服务器设置好 而不能在代码里去新建topic（ 如果没有创建好，生产者往该主题发送消息 会报找不到topic错误）
      */
     public static final String TOPIC = "topic_family";
+    
+    
+	public String getRocketServer() {
+		return rocketServer;
+	}
+	public void setRocketServer(String rocketServer) {
+		this.rocketServer = rocketServer;
+	}
+    
+    
 
 }

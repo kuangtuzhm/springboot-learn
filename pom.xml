@@ -10,7 +10,7 @@
   <artifactId>springboot-learn</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <!-- 公共属�?�定�? -->
+  <!-- 公共属�?�定�?? -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -29,5 +29,6 @@
     <module>springboot-learn-kafkaconsumer</module>
     <module>springboot-learn-mybatis</module>
     <module>springboot-learn-activemq</module>
+    <module>springboot-learn-rocketmq</module>
   </modules>
 </project>

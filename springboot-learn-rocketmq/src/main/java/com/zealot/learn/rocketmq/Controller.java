@@ -70,4 +70,10 @@ public class Controller {
         }
         return "成功";
     } 
+    
+    @RequestMapping("/wstest")
+    public Object wstest() throws Exception {
+        
+        return "wstest";
+    } 
 }

@@ -16,6 +16,7 @@
 
 package com.zealot.learn.rocketmq;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -61,21 +62,27 @@ public class Consumer {
 				consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 				//订阅主题和 标签（ * 代表所有标签)下信息
 				consumer.subscribe(JmsConfig.TOPIC, "*");
+				consumer.setVipChannelEnabled(false);
 				// //注册消费的监听 并在此监听中消费信息，并返回消费的状态信息
 				consumer.registerMessageListener(new MessageListenerConcurrently() {
 
 				    @Override
 				    public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-				    	logger.info("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+				    	//logger.info("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+				    	for(MessageExt msg : msgs)
+				    	{
+				    		String value = new String(msg.getBody());
+				    		logger.info("Consumer:tag="+msg.getTags()+";value="+value);
+				    	}
 				        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 				    }
        
 				});
 
 				consumer.start();
-				logger.info("消费者启动成功=======");
+				logger.info("消费者Consumer启动成功=======");
 			} catch (MQClientException e) {
-				logger.error("消费者启动失败=======",e);
+				logger.error("消费者Consumer启动失败=======",e);
 			}
         }
         
